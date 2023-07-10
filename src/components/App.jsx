@@ -14,15 +14,42 @@ const getDefaultContacts = () => [
 ];
 
 export const App = () => {
+  const [filter, setFilter] = useState('');
+
+  ///////////////// v1 start ///////////////////////
+
   const [contacts, setContacts] = useState(() => {
     const savedContacts = localStorage.getItem('contacts');
     return savedContacts ? JSON.parse(savedContacts) : getDefaultContacts();
   });
-  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
+
+  ///////////////// v1 end ///////////////////////
+  ///////////////// v2 start ///////////////////////
+
+  // const [isMounted, setIsMounted] = useState(false);
+  // const [contacts, setContacts] = useState([]);
+
+  // useEffect(() => {
+  //   setIsMounted(true);
+  //   const savedContacts = localStorage.getItem('contacts');
+
+  //   if (!savedContacts) return;
+
+  //   const parsedContacts = JSON.parse(savedContacts);
+  //   setContacts(parsedContacts);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!isMounted) return;
+
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts, isMounted]);
+
+  ///////////////// v2 end ///////////////////////
 
   const handleFormSubmit = (name, number) => {
     const existingContact = contacts.find(
