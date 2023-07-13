@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export const Filter = ({ filter, filterChange }) => {
   return (
@@ -10,9 +9,4 @@ export const Filter = ({ filter, filterChange }) => {
       placeholder="Search..."
     />
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onFilterChange: PropTypes.func,
 };
