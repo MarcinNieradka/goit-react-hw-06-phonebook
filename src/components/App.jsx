@@ -5,8 +5,10 @@ import { ContactList } from './ContactList';
 import { nanoid } from 'nanoid';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, deleteContact, setFilter } from '../redux/contactsReducer';
+import { addContact, deleteContact } from '../redux/contactsReducer';
+import { setFilter } from 'redux/filtersReducer';
 import { getContacts, getFilter } from 'redux/selectors';
+import PropTypes from 'prop-types';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -14,10 +16,8 @@ export const App = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
-  // const { contacts, filter } = useSelector(state => state.contacts);
-
   // const contacts = useSelector(state => state.contacts.contacts);
-  // const filter = useSelector(state => state.contacts.filter);
+  // const filter = useSelector(state => state.filters.filter);
 
   const handleFormSubmit = (name, number) => {
     const existingContact = contacts.find(
@@ -60,4 +60,18 @@ export const App = () => {
       />
     </div>
   );
+};
+
+App.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  filter: PropTypes.string,
+  handleFormSubmit: PropTypes.func,
+  handleDeleteContact: PropTypes.func,
+  handleFilterChange: PropTypes.func,
 };
