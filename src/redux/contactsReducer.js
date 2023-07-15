@@ -1,4 +1,5 @@
-import { createAction, createReducer, createSlice } from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
+// import { createSlice } from '@reduxjs/toolkit';
 
 const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
 const initialState = {
